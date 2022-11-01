@@ -19,7 +19,7 @@ const getUser = async (req, res) => {
   });
   //upload the user to the database
   console.log(summoner);
-  const queryStr = `INSERT INTO summoners (name, accountId, id, puuid, profileIconId, revisionDate, summonerLevel) VALUES ('${summoner.name}', '${summoner.accountId}', '${summoner.id}', '${summoner.puuid}', '${summoner.profileIconId}', '${summoner.revisionDate}', '${summoner.summonerLevel}')`;
+  const queryStr = `INSERT INTO Summoners (name, accountId, id, puuid, profileIconId, revisionDate, summonerLevel) VALUES ('${summoner.name}', '${summoner.accountId}', '${summoner.id}', '${summoner.puuid}', '${summoner.profileIconId}', '${summoner.revisionDate}', '${summoner.summonerLevel}')`;
   const rows = await query(queryStr);
   res.send(data);
   // const name = req.params.name;
