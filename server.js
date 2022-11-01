@@ -13,7 +13,7 @@ const pool = mariadb.createPool({
   port: process.env.DB_PORT,
   user: "root",
   password: "pass",
-  database: "todos",
+  database: "test",
 });
 console.log(process.env.DB_HOST);
 /*
