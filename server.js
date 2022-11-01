@@ -9,11 +9,11 @@ const HOST = "0.0.0.0";
 //DB
 console.log(process.env.DB_PORT);
 const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
+  host: process.env.DB_SUMMONER_HOST,
   port: process.env.DB_PORT,
   user: "root",
-  password: "pass",
-  database: "test",
+  password: process.env.DB_SUMMONER_PASS,
+  database: process.env.DB_SUMMONER_DB,
 });
 console.log(process.env.DB_HOST);
 /*
