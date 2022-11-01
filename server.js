@@ -1,63 +1,22 @@
 "use strict";
 const mariadb = require("mariadb");
 const express = require("express");
-
-// Constants
+const router = express.Router();
+const { query } = require("./sql.js");
+const summoners_routes = require("./routes/summoner.js");
 const PORT = 8080;
 const HOST = "0.0.0.0";
+// async function getTodos() {
+//   let conn;
+//   try {
+//     conn = await pool.getConnection();
+//     const rows = await conn.query("SELECT * FROM todos");
+//     return rows;
+//   } catch (err) {
+//     return err;
+//   }
+// }
 
-//DB
-console.log(process.env.DB_PORT);
-const pool = mariadb.createPool({
-  host: process.env.DB_SUMMONER_HOST,
-  port: process.env.DB_PORT,
-  user: "root",
-  password: process.env.DB_SUMMONER_PASS,
-  database: process.env.DB_SUMMONER_DB,
-});
-console.log(process.env.DB_HOST);
-/*
-async function asyncFunction() {
-
-  let conn;
-          try {
-                        conn = await pool.getConnection();
-                        const rows = await conn.query("SELECT * FROM todos");
-                        console.log(rows); //[ {val: 1}, meta: ... ]
-
-                    } catch (err) {
-                                throw err;
-                                  } finally {
-                                        if (conn) return conn.end();
-                                          }
-
-}
-
-//asyncFunction();
-*/
-async function getTodos() {
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const rows = await conn.query("SELECT * FROM todos");
-    return rows;
-  } catch (err) {
-    return err;
-  }
-}
-
-/*
-database.connect(function (err) {
-        if (err) {
-                console.log('Error connecting to Db');
-                console.log(err);
-                return;
-        }
-        console.log('Connection established');
-        console.log(err);
-});
-
-*/
 // App
 const app = express();
 
@@ -69,7 +28,12 @@ app.get("/todos", async (req, res) => {
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-
+app.use("/summoners", summoners_routes);
 app.listen(PORT, HOST, () => {
   console.log(`Running on http://${HOST}:${PORT}`);
 });
+// router.get("/summoners/:name", async (req, res) => {
+//   const name = req.params.name;
+//   const rows = await query(`SELECT * FROM summoners WHERE name = '${name}'`);
+//   res.send(rows);
+// });
